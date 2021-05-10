@@ -1,0 +1,41 @@
+{% set canonicalURL = siteData.baseURL + page.url %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% if isHomepage %}
+        <title>{{ siteData.siteTitle }}</title>
+    {% else %}
+        <title>{{ siteData.siteTitle }} | {{ section }} {{ sectionTitle }}</title>
+    {% endif %}
+
+    <link rel="stylesheet" href="{{ siteData.baseURL }}/bootstrap.min.css" type="text/css">
+    <script src="{{ siteData.baseURL }}/bootstrap.min.js" defer></script>
+    <script src="{{ siteData.baseURL }}/jquery-3.5.1.slim.min.js" defer></script>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic");
+        body {
+            font-family: "Lato", sans-serif;
+        }
+    </style>
+    
+    {% include 'partials/meta.html' %}
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+    
+    {% include 'partials/jumbotron.html' %}
+    <main class="container">
+        {% block body %}{% endblock %}
+        <br>
+        {% include 'partials/footer.html' %}
+    </main>
+    <br>
+
+</body>
+</html>
