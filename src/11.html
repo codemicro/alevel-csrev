@@ -7,6 +7,14 @@
 
 {% extends 'layout.html' %}
 
+{% macro register() %}
+<div class="badge badge-success">Register</div>
+{% endmacro %}
+
+{% macro component() %}
+<div class="badge badge-primary">Component</div>
+{% endmacro %}
+
 {% block body %}
 {% include 'partials/contentsBegin.html' %}
 <i>TODO</i>
@@ -16,20 +24,73 @@
 
 {{ headers.header("structureandfunction", "<code>1.1.1</code> Structure and function of the processor") }}
 
-<p>Hello world</p>
-
 {{ headers.subheader("components", "Parts of a processor") }}
 
 <ul>
     <li>
-        <b>The Arithmetic Logic Unit</b>
+        <b>The Arithmetic Logic Unit {{ component() }}</b>
         <p>The ALU does all the actual processing in the CPU. It performs arithmetical (addition and subtraction) and logical (OR, AND, NOT, etc.) operations on data. It also hold data to be worked on and data that has been worked on until there's a chance for said data to be used/moved.</p>
     </li>
     <li>
-        <b>The Control Unit</b>
+        <b>The Control Unit {{ component() }}</b>
         <p>The CU orchestrates the operation of the CPU by managing how instructions are executed. It's the component in charge of fetching instructions and data from memory, decoding instructions (using the instruction decoder) and executing the instruction by sending signals to the relevant areas of the processor.</p>
+    </li>
+    <li>
+        <b>The Program Counter {{ register() }}</b>
+        <p>The PC is used to keep track of the state of the currently executing program. It stores a memory address that is incremented by one each time one tick is completed.</p>
+    </li>
+    <li>
+        <b>The Accumulator {{ register() }}</b>
+        <p>The Accumulator holds bits of data that are currently being worked on by the ALU, or a result of a calculation from the ALU.</p>
+    </li>
+    <li>
+        <b>The Memory Address Register and Current Instruction Register {{ register() }}</b>
+        <p>The MAR holds the address of the next memory address to write to or read from. It works closely alongside the CIR, which holds the address of the currently executing instruction. This is required since some instructions can take multiple clock cycles and memory reads to fully execute.</p>
+    </li>
+    <li>
+        <b>The Status Register/Processor Status Register/Flag Register {{ register() }}</b>
+        <p>The contains bits that are either set or unset based on an instruction, which determine the manner in which the processor operates. The FR also handles processor interrupts.<br>Each time the FDE cycle occurs, the contents of this register is checked.</p>
+    </li>
+    <li>
+        <b>General purpose registers {{ register() }}</b>
+        <p>A CPU also contains multuiple general purpose register that a program can use for any task.</p>
     </li>
 </ul>
 
+{{ headers.subheader("fdecycle", "The Fetch, Decode, Execute cycle") }}
+
+<p>The FDE cycle is a sequence of actions that a processor takes to fully execute an instruction, and is comprised of three main stages: <i>fetch</i>ing instructions, <i>decod</i>ing instructions and <i>execut</i>ing instructions.</p>
+
+<p>An instruction is a combination of an opcode and an operand. The opcode is the actual instruction to execute, and the operand is the data to perform the instruction on.</p>
+
+<ul>
+    <li>
+        <b>Fetch</b>
+        <ul>
+            <li>The contents of the PC are copied into the MAR</li>
+            <li>A memory read occurs - this copies the contents of the memory address specified by the MAR into the MDR</li>
+            <li>The PC is incremented by one</li>
+            <li>The instruction word (opcode) is copied into the CIR from the MDR</li>
+        </ul>
+    </li>
+    <li>
+        <b>Decode</b>
+        <ul>
+            <li>The contents of the CIR are interpreted by the CU, which will then begin controlling various aspects of the processor in order to execute the instruction</li>
+        </ul>
+    </li>
+    <li>
+        <b>Execute</b>
+        <ul>
+            <li>The opcode of the instruction is decomposed into a simple operation, like adding or comparing two values or storing a value</li>
+            <li>This action is then executed
+                <ul>
+                    <li>If this instruction invokes a memory write or read, a memory address specified in the operand is stored in the MDR and the memory read is commanded by the CU</li>
+                </ul>
+            </li>
+            <li>Unless the instruction is <code>stop</code>, the cycle repeats from here.</li>
+        </ul>
+    </li>
+</ul>
 
 {% endblock %}
