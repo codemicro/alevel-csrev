@@ -93,4 +93,23 @@
     </li>
 </ul>
 
+{{ headers.subheader("perf", "Performance of a CPU") }}
+
+<p>The overall performance of a CPU is determined by multiple factors.</p>
+
+<ul>
+    <li>
+        <b>Clock speed</b>
+        <p>The clock speed of a processor is how many times per second the FDE cycle can be completed. It's measured in hertz, and modern processors can be running at speeds in the {{ components.tooltip("gigahertz", "a billion hertz") }} range.</p>
+    </li>
+    <li>
+        <b>Core count</b>
+        <p>A CPU can have multiple cores, each one acting like a separate mini CPU. The presence of multiple cores allows for multiple instructions to be executed in parallel, hence affecting the performance of a CPU.</p>
+    </li>
+    <li>
+        <b>Cache</b>
+        <p>Processors frequently have to fetch instructions and data from the main memory. Compared to the speed of the processor, this is painfully slow, which causes a severe bottleneck. To migitage this, the procesor caches commonly used data and instructions in very high speed registers inside the processor, which reduces the time wasted spent waiting on memory reads.</p>
+    </li>
+</ul>
+
 {% endblock %}
