@@ -124,8 +124,37 @@
 
 <p>Dead time in the processor is not entirely removed, since different phases may take different amounts of time, but it drastically improves the efficiency of the processor.</p>
 
-<p>The key limitation of pipelining is that it can only be used with RISC CPUs. In a CISC CPU, an instruction might take more than one {{ components.tooltip("tick", "one clock cycle") }} to complete, meaning that after a single tick it cannot be guaranteed that every section of the processor will be ready to recieve something new to work on.</p>
+<p>The key limitation of pipelining is that it can only be used with RISC CPUs (and not in the Von Neumann architecture). In a CISC CPU, an instruction might take more than one {{ components.tooltip("tick", "one clock cycle") }} to complete, meaning that after a single tick it cannot be guaranteed that every section of the processor will be ready to recieve something new to work on.</p>
 
 <p>As a result, you will only see pipelining employed in small, embedded devices, like handheld or IoT devices.</p>
+
+{{ headers.subheader("architectures", "Processor architectures") }}
+
+<p>There are two main processor architectures - the Von Neumann architecture, and the Harvard architecture. The main difference between the two is that the Harvard architecture employs a separate memory bank for data and instructions.</p>
+
+<table class="table">
+    <tr>
+        <th>Von Neumann</th>
+        <th>Harvard</th>
+    </tr>
+    <tr>
+        <td>Program data and instructions share a memory area</td>
+        <td>Program data and instructions have separate memory areas</td>
+    </tr>
+    <tr>
+        <td>Each instruction takes two clock cycles to execute (decode, execute)</td>
+        <td>Each instruction takes a single clock cycle to execute (if pipelined)</td>
+    </tr>
+    <tr>
+        <td>Pipelining cannot be implemented</td>
+        <td>Pipelinig can be implemented</td>
+    </tr>
+    <tr>
+        <td>Older and more robust (very widely used, battled tested)</td>
+        <td>Newer and fancier</td>
+    </tr>
+</table>
+
+<p>It's common for embedded systems to use the Harvard architecture, and for general purpose computers to use the Von Neumann architecture.</p>
 
 {% endblock %}
