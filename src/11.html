@@ -93,6 +93,8 @@
     </li>
 </ul>
 
+<p><mark>TODO: buses</mark></p>
+
 {{ headers.subheader("perf", "Performance of a CPU") }}
 
 <p>The overall performance of a CPU is determined by multiple factors.</p>
@@ -111,5 +113,19 @@
         <p>Processors frequently have to fetch instructions and data from the main memory. Compared to the speed of the processor, this is painfully slow, which causes a severe bottleneck. To migitage this, the procesor caches commonly used data and instructions in very high speed registers inside the processor, which reduces the time wasted spent waiting on memory reads.</p>
     </li>
 </ul>
+
+{{ headers.subheader("pipelining", "Pipelining") }}
+
+<p>Pipelining is a method of processor optimisation that works by executing multiple instructions that are in multiple stages of the FDE cycle at the same time.</p>
+
+<p>When an instruction is in the execution phase of the FDE cycle, other sections of the processor that would usually handle fetching and decoding instructions are sat idle, doing nothing, wasting time.</p>
+
+<p>A production line type system is employed. While one instruction is in the execute phase, another instruction can be in the decode phase, and another instruction can be in the fetch phase. Each of these phases will be occuring simultanously. This improves the overall utilisation of the processor, as dead time is reduced.</p>
+
+<p>Dead time in the processor is not entirely removed, since different phases may take different amounts of time, but it drastically improves the efficiency of the processor.</p>
+
+<p>The key limitation of pipelining is that it can only be used with RISC CPUs. In a CISC CPU, an instruction might take more than one {{ components.tooltip("tick", "one clock cycle") }} to complete, meaning that after a single tick it cannot be guaranteed that every section of the processor will be ready to recieve something new to work on.</p>
+
+<p>As a result, you will only see pipelining employed in small, embedded devices, like handheld or IoT devices.</p>
 
 {% endblock %}
