@@ -184,4 +184,20 @@
 
 <p>It's common for embedded systems to use the Harvard architecture, and for general purpose computers to use the Von Neumann architecture.</p>
 
+{{ headers.header("typesofprocessor", "<code>1.1.2</code> Types of processor") }}
+
+{{ headers.subheader("ciscrisc", "CISC and RISC processors") }}
+
+<p>CISC and RISC refer to the instruction set that a processor uses. They stand for Complex Instruction Set Computers and Reduced Instruction Set Computers.</p>
+
+<p>CISC CPUs are of the types made by Intel and AMD - they use less registers than their equivalent RISC CPU, but uses microprogramming on the chip itself to handle differing formats of instructions. Its aim is to facilitate the completion of a task in as few lines of assembly code as possible, by morphing a single instruction into a more complex task comprised of multiple, lower level instructions. One of these complex instructions takes more than a single clock cycle to execute.</p>
+
+<p>The extra circuitry in a CISC processor requires more power, which creates more heat, which means that CISC processors are only used in applications where there is a capacity dealing with that heat (for example, in a laptop you have the space to integrate a proper cooling system, but you do not in a smartphone).</p>
+
+<p>RISC CPUs are processors with a smaller set of instructions available for use - the focus here is not to reduce the amount of Assembly code required, but to increase the efficiency of the CPU by removing unnecessary complexities.</p>
+
+<p>80% of the work in a CISC CPU is done by 20% of the available instructions. If you leave only the fundamental instructions, you can remove the requirement for extra circuitry on a chip, which also removes the requirement for more power and the generation of as much heat.</p>
+
+<p>RISC processors are commonly used in phones and tablets, are cheaper than CISC processors, run at slower clock speeds (but take less time to do something - also it's not like a phone is doing anything especially heavy) and are more efficient for simple tasks than their CISC counterpart.</p>
+
 {% endblock %}
