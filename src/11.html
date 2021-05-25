@@ -15,6 +15,10 @@
 <div class="badge badge-primary">Component</div>
 {% endmacro %}
 
+{% macro bus() %}
+<div class="badge badge-warning">Bus</div>
+{% endmacro %}
+
 {% block body %}
 {% include 'partials/contentsBegin.html' %}
 <i>TODO</i>
@@ -28,32 +32,44 @@
 
 <ul>
     <li>
-        <b>The Arithmetic Logic Unit {{ component() }}</b>
+        <b>Arithmetic Logic Unit {{ component() }}</b>
         <p>The ALU does all the actual processing in the CPU. It performs arithmetical (addition and subtraction) and logical (OR, AND, NOT, etc.) operations on data. It also hold data to be worked on and data that has been worked on until there's a chance for said data to be used/moved.</p>
     </li>
     <li>
-        <b>The Control Unit {{ component() }}</b>
+        <b>Control Unit {{ component() }}</b>
         <p>The CU orchestrates the operation of the CPU by managing how instructions are executed. It's the component in charge of fetching instructions and data from memory, decoding instructions (using the instruction decoder) and executing the instruction by sending signals to the relevant areas of the processor.</p>
     </li>
     <li>
-        <b>The Program Counter {{ register() }}</b>
+        <b>Program Counter {{ register() }}</b>
         <p>The PC is used to keep track of the state of the currently executing program. It stores a memory address that is incremented by one each time one tick is completed.</p>
     </li>
     <li>
-        <b>The Accumulator {{ register() }}</b>
+        <b>Accumulator {{ register() }}</b>
         <p>The Accumulator holds bits of data that are currently being worked on by the ALU, or a result of a calculation from the ALU.</p>
     </li>
     <li>
-        <b>The Memory Address Register and Current Instruction Register {{ register() }}</b>
+        <b>Memory Address Register and Current Instruction Register {{ register() }}</b>
         <p>The MAR holds the address of the next memory address to write to or read from. It works closely alongside the CIR, which holds the address of the currently executing instruction. This is required since some instructions can take multiple clock cycles and memory reads to fully execute.</p>
     </li>
     <li>
-        <b>The Status Register/Processor Status Register/Flag Register {{ register() }}</b>
+        <b>Status Register/Processor Status Register/Flag Register {{ register() }}</b>
         <p>The contains bits that are either set or unset based on an instruction, which determine the manner in which the processor operates. The FR also handles processor interrupts.<br>Each time the FDE cycle occurs, the contents of this register is checked.</p>
     </li>
     <li>
         <b>General purpose registers {{ register() }}</b>
         <p>A CPU also contains multuiple general purpose register that a program can use for any task.</p>
+    </li>
+    <li>
+        <b>Memory Address Bus {{ bus() }}</b>
+        <p>The MA bus is used to send memory addresses from the CPU to the main memory, as the memory address to either read to or write from. This bus is one-way - nothing is ever sent from the main memory to the CPU on this bus.</p>
+    </li>
+    <li>
+        <b>Memory Data Bus {{ bus() }}</b>
+        <p>The MD bus is used to transfer data to and from the main memory from the CPU. Anything coming from the main memory comes through here and is deposited in the MDR. Anything going to the main memory is taken from the MDR and sent along this bus to the main memory. It is two-way.</p>
+    </li>
+    <li>
+        <b>Contorl Bus {{ bus() }}</b>
+        <p>The Control bus is used to control the functioning of the processor. It's used to send signals to different components of the CPU in order to invoke various actions, like to invoke a memory read or write. This is used by the CU.</p>
     </li>
 </ul>
 
