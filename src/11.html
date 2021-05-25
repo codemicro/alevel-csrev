@@ -25,7 +25,11 @@
     <li>
         <a href="#structureandfunction"><code>1.1.1</code> Structure and function of the processor</a>
         <ul>
-            <li><a href="#components">Parts of a processor</a></li>
+            <li><a href="#components">Parts of a processor</a>
+                <ul>
+                    <li><a href="#buses">A little bit about buses</a></li>
+                </ul>
+            </li>
             <li><a href="#fdecycle">The Fetch, Decode, Execute cycle</a></li>
             <li><a href="#perf">Performance of a CPU</a></li>
             <li><a href="#pipelining">Pipelining</a></li>
@@ -73,6 +77,7 @@
     <li>
         <b>Memory Address Bus {{ bus() }}</b>
         <p>The MA bus is used to send memory addresses from the CPU to the main memory, as the memory address to either read to or write from. This bus is one-way - nothing is ever sent from the main memory to the CPU on this bus.</p>
+        <p>The size of this bus determines the amount of addressable memory in a computer, that value being two times the word size of the MA bus.</p>
     </li>
     <li>
         <b>Memory Data Bus {{ bus() }}</b>
@@ -80,9 +85,15 @@
     </li>
     <li>
         <b>Contorl Bus {{ bus() }}</b>
-        <p>The Control bus is used to control the functioning of the processor. It's used to send signals to different components of the CPU in order to invoke various actions, like to invoke a memory read or write. This is used by the CU.</p>
+        <p>The Control bus is used to control the functioning of the processor. It's used to send signals to different components of the CPU in order to invoke various actions, like to invoke a memory read or write or I/O operations. This is used by the CU.</p>
     </li>
 </ul>
+
+{{ headers.subsubheader("buses", "A little bit about buses") }}
+
+<p>Buses are used by a processor to move signals around the CPU. Physically, buses are traces on the motherboard or inside the CPU, and typically there are multiple traces to carry multiple signals at once.</p>
+
+<p>This is what the word size of a bus is referring to. The word size, measured in bits, is the amount of traces that comprise a bus. If you have a 32-bit bus, there will be 32 physical connections on the circuit board. The higher this value, this more data that can be transferred at once and the more efficient the bus is.</p>
 
 {{ headers.subheader("fdecycle", "The Fetch, Decode, Execute cycle") }}
 
