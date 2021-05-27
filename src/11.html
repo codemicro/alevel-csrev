@@ -36,6 +36,20 @@
             <li><a href="#architectures">Processor architectures</a></li>
         </ul>
     </li>
+    <li>
+        <a href="#typesofprocessor"><code>1.1.2</code> Types of processor</a>
+        <ul>
+            <li><a href="#ciscrisc">CISC and RISC processors</a></li>
+            <li><a href="#gpus">Graphics Processing Units</a></li>
+            <li><a href="#multiple">Doing multiple things at once</a>
+                <ul>
+                    <li><a href="#multicore">Multicore systems</a></li>
+                    <li><a href="#parallel">Parallel processing</a></li>
+                </ul>
+            </li>
+            <li><a href="#gpus">Graphics Processing Units</a></li>
+        </ul>
+    </li>
 </ul>
 {% include 'partials/contentsEnd.html' %}
 
@@ -91,6 +105,10 @@
 
 {{ headers.subsubheader("buses", "A little bit about buses") }}
 
+<br>
+{{ images.image("../img/bus.jpg", "a bus... beep beep") }}
+<br>
+
 <p>Buses are used by a processor to move signals around the CPU. Physically, buses are traces on the motherboard or inside the CPU, and typically there are multiple traces to carry multiple signals at once.</p>
 
 <p>This is what the word size of a bus is referring to. The word size, measured in bits, is the amount of traces that comprise a bus. If you have a 32-bit bus, there will be 32 physical connections on the circuit board. The higher this value, this more data that can be transferred at once and the more efficient the bus is.</p>
@@ -130,8 +148,6 @@
         </ul>
     </li>
 </ul>
-
-<p><mark>TODO: buses</mark></p>
 
 {{ headers.subheader("perf", "Performance of a CPU") }}
 
@@ -210,5 +226,23 @@
 <p>80% of the work in a CISC CPU is done by 20% of the available instructions. If you leave only the fundamental instructions, you can remove the requirement for extra circuitry on a chip, which also removes the requirement for more power and the generation of as much heat.</p>
 
 <p>RISC processors are commonly used in phones and tablets, are cheaper than CISC processors, run at slower clock speeds (but take less time to do something - also it's not like a phone is doing anything especially heavy) and are more efficient for simple tasks than their CISC counterpart.</p>
+
+{{ headers.subheader("multiple", "Doing multiple things at once") }}
+
+<p>It's pretty common to use a computer for multiple different tasks at once - for example, you could be typing out a report in your word processor while listening to music in your web browser. This requires your computer to be multitasking - literally doing two different things at once.</p>
+
+{{ headers.subsubheader("multicore", "Multicore systems") }}
+
+<p>Modern processors have multiple CPU cores, which are essentially mini processors inside of one main processor. This means that a single CPU can be executing more than one instruction at any one given time by assigining different tasks to different processor cores. Having more processor cores increases the performance of the overall CPU.</p>
+
+{{ headers.subsubheader("parallel", "Parallel processing") }}
+
+<p>Parallel computing is where a task is decomposed into multiple, smaller tasks, distributed across multiple cores for processing and reconstructed into a single result when all concurrent processing for that task has finished. An example of this is rendering a frame in a GPU.</p>
+
+{{ headers.subheader("gpus", "Graphics Processing Units") }}
+
+<p>A GPU (also known as a video card) is a {{ components.tooltip("coprocessor", "A computer processor used to supplement the functions of the main CPU") }} intended to be used for graphics processing. They differ from a traditional processor in that they have far more processor cores, allowing for many synchronous operations to be occuring at once. This is especially useful in for rendering graphics, as many frames need to be rendered per second. <a href="https://www.nvidia.com/en-gb/geforce/graphics-cards/rtx-2080/" rel="noopener noreferrer">The GeForce RTX 2080 has nearly 3000 cores.</a></p>
+
+<p>GPUs, however, also have uses outside of graphics processing. Often, they are used for cryptocurrency mining and machine learning as the same properties that make them suitable for rendering video make them suitable for use in these other applications.</p>
 
 {% endblock %}
