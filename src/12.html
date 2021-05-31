@@ -1,0 +1,65 @@
+{% set section = "1.2" %}
+{% set sectionTitle = "Software and software development" %}
+
+{% import "imports/headers.html" as headers %}
+{% import "imports/images.html" as images %}
+{% import "imports/components.html" as components %}
+
+{% extends 'layout.html' %}
+
+{% block body %}
+{% include 'partials/contentsBegin.html' %}
+<ul>
+    <li><a href="#systemssoftware"><code>1.2.1</code> Systems software</a>
+        <ul>
+            <li><a href="#memorymanagement">Memory management</a>
+                <ul>
+                    <li><a href="#segmentation">Segmentation</a></li>
+                    <li><a href="#paging">Paging</a></li>
+                    <li><a href="#vmem">Virtual memory</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+{% include 'partials/contentsEnd.html' %}
+
+<br>
+
+{{ headers.header("systemssoftware", "<code>1.2.1</code> Systems software") }}
+
+{{ headers.subheader("os", "Operating systems") }}
+
+<p>Operating systems is the software the manages the resources of a computer, providing an interface between software and hardware. The OS is not a single thing - instead, it's a collection of lots of smaller programs that work in synchrony to perform the overall task of running the computer.</p>
+
+<p>The roles of an operating system are as follows:</p>
+
+<ul>
+    <li>Provide a user interface (a way to use the computer - GUI, gestures, cursors, etc)</li>
+    <li>Perform processor management (sharing processor time, managing interrupts, etc)</li>
+    <li>Perform memory management (virtual memory, loading/clearing memory, segmentation, etc)</li>
+    <li>Dealing with peripherals for both input and output (IO requests, device drivers, etc)</li>
+    <li>Provide utility programs (disk defragmentation, file managers, etc)</li>
+    <li>Provide networking services</li>
+    <li>Maintain system security (user access controls, file permission management, etc.)</li>
+</ul>
+
+{{ headers.subheader("memorymanagement", "Memory management") }}
+
+{{ headers.subsubheader("segmentation", "Segmentation") }}
+
+<p>Segmentation is where the system memory is split into blocks called segments that each store their own set of data. Each segment has an ID and offset (eseentially a length), which is required because segments can have varying sizes depending on the OS and their state.</p>
+
+<p>The OS maintains a record of these segments to track and effectively deal with memory. Segmentation can be used to aid with virtual memory, since entire segments can be sent to/received from secondary storage.</p>
+
+{{ headers.subsubheader("paging", "Paging") }}
+
+<p>Paging is when the OS will load a fixed-size block of data into RAM from the secondary storage. This block is called a <i>page</i>. It allows programs bigger than the RAM of the computer to run.</p>
+
+<p>Think of it like a book of instructions - each page contains a set of instructions, one page of which you are using. You can forget about previous pages, because you've already used them, and you don't need to think about coming pages, because you're not ready to use them yet.</p>
+
+{{ headers.subsubheader("vmem", "Virtual memory") }}
+
+<p>Virtual memory is helpful when the system completely runs out of RAM and tends to be used alongside segmentation and paging. It's a tool to manage help share what is a finite resource across a system. <a href="../11/#storage">Read more about virtual memory here</a>.</p>
+
+{% endblock %}
