@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+        <title>OCR A-level CompSci | 1.1 The characteristics of contemporary processors, input, output and storage devices</title>
+    
+
+    <link rel="stylesheet" href="https://pages.tdpain.net/alevel-csrev/bootstrap.min.css" type="text/css">
+    <script src="https://pages.tdpain.net/alevel-csrev/bootstrap.min.js" defer></script>
+    <script src="https://pages.tdpain.net/alevel-csrev/jquery-3.5.1.slim.min.js" defer></script>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic");
+        body {
+            font-family: "Lato", sans-serif;
+        }
+    </style>
+    
+    <meta property="og:site_name" content="tdpain.net">
+
+    <meta property="og:title" content="OCR CompSci - 1.1 The characteristics of contemporary processors, input, output and storage devices">
+    <meta property="og:description" content="Revision materials for section 1.1 (The characteristics of contemporary processors, input, output and storage devices) of the OCR GCSE CompSci course.">
+    <meta name="description" content="Revision materials for section 1.1 (The characteristics of contemporary processors, input, output and storage devices) of the OCR GCSE CompSci course.">
+
+<meta property="og:url" content="https://pages.tdpain.net/alevel-csrev/11/">
+
+
+    
+</head>
+<body>
+    
+    <div class="jumbotron jumbotron-fluid">
+    <div style="position: absolute; top: 0; padding-left: 10px; padding-top: 5px; font-size: 15px">
+        
+            <a href="../">Go back</a>
+        
+    </div>
+    <div class="container">
+
+        
+            <h1 class="display-4">1.1 The characteristics of contemporary processors, input, output and storage devices</h1>
+        
+
+        <p class="lead">OCR A-level Computer Science (H446)</p>
+    </div>
+</div>
+    <main class="container">
+        
+<div class="card" style="width: 40rem;">
+    <div class="card-body">
+        <h6>Contents</h6>
+<ul>
+    <li>
+        <a href="#structureandfunction"><code>1.1.1</code> Structure and function of the processor</a>
+        <ul>
+            <li><a href="#components">Parts of a processor</a>
+                <ul>
+                    <li><a href="#buses">A little bit about buses</a></li>
+                </ul>
+            </li>
+            <li><a href="#fdecycle">The Fetch, Decode, Execute cycle</a></li>
+            <li><a href="#perf">Performance of a CPU</a></li>
+            <li><a href="#pipelining">Pipelining</a></li>
+            <li><a href="#architectures">Processor architectures</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#typesofprocessor"><code>1.1.2</code> Types of processor</a>
+        <ul>
+            <li><a href="#ciscrisc">CISC and RISC processors</a></li>
+            <li><a href="#gpus">Graphics Processing Units</a></li>
+            <li><a href="#multiple">Doing multiple things at once</a>
+                <ul>
+                    <li><a href="#multicore">Multicore systems</a></li>
+                    <li><a href="#parallel">Parallel processing</a></li>
+                </ul>
+            </li>
+            <li><a href="#gpus">Graphics Processing Units</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#iostorage"><code>1.1.3</code> Input, output and storage</a>
+        <ul>
+            <li><a href="#io">Input and output</a></li>
+            <li><a href="#storage">Storage</a></li>
+        </ul>
+    </li>
+</ul>
+    </div>
+</div>
+
+<br>
+
+
+<h3 id="structureandfunction"><code>1.1.1</code> Structure and function of the processor</h3>
+
+
+
+<h4 id="components">Parts of a processor</h5>
+
+
+<ul>
+    <li>
+        <b>Arithmetic Logic Unit 
+<div class="badge badge-primary">Component</div>
+</b>
+        <p>The ALU does all the actual processing in the CPU. It performs arithmetical (addition and subtraction) and logical (OR, AND, NOT, etc.) operations on data. It also hold data to be worked on and data that has been worked on until there's a chance for said data to be used/moved.</p>
+    </li>
+    <li>
+        <b>Control Unit 
+<div class="badge badge-primary">Component</div>
+</b>
+        <p>The CU orchestrates the operation of the CPU by managing how instructions are executed. It's the component in charge of fetching instructions and data from memory, decoding instructions (using the instruction decoder) and executing the instruction by sending signals to the relevant areas of the processor.</p>
+    </li>
+    <li>
+        <b>Program Counter 
+<div class="badge badge-success">Register</div>
+</b>
+        <p>The PC is used to keep track of the state of the currently executing program. It stores a memory address that is incremented by one each time one tick is completed.</p>
+    </li>
+    <li>
+        <b>Accumulator 
+<div class="badge badge-success">Register</div>
+</b>
+        <p>The Accumulator holds bits of data that are currently being worked on by the ALU, or a result of a calculation from the ALU.</p>
+    </li>
+    <li>
+        <b>Memory Address Register and Current Instruction Register 
+<div class="badge badge-success">Register</div>
+</b>
+        <p>The MAR holds the address of the next memory address to write to or read from. It works closely alongside the CIR, which holds the address of the currently executing instruction. This is required since some instructions can take multiple clock cycles and memory reads to fully execute.</p>
+    </li>
+    <li>
+        <b>Status Register/Processor Status Register/Flag Register 
+<div class="badge badge-success">Register</div>
+</b>
+        <p>The contains bits that are either set or unset based on an instruction, which determine the manner in which the processor operates. The FR also handles processor interrupts.<br>Each time the FDE cycle occurs, the contents of this register is checked.</p>
+    </li>
+    <li>
+        <b>General purpose registers 
+<div class="badge badge-success">Register</div>
+</b>
+        <p>A CPU also contains multuiple general purpose register that a program can use for any task.</p>
+    </li>
+    <li>
+        <b>Memory Address Bus 
+<div class="badge badge-warning">Bus</div>
+</b>
+        <p>The MA bus is used to send memory addresses from the CPU to the main memory, as the memory address to either read to or write from. This bus is one-way - nothing is ever sent from the main memory to the CPU on this bus.</p>
+        <p>The size of this bus determines the amount of addressable memory in a computer, that value being two times the word size of the MA bus.</p>
+    </li>
+    <li>
+        <b>Memory Data Bus 
+<div class="badge badge-warning">Bus</div>
+</b>
+        <p>The MD bus is used to transfer data to and from the main memory from the CPU. Anything coming from the main memory comes through here and is deposited in the MDR. Anything going to the main memory is taken from the MDR and sent along this bus to the main memory. It is two-way.</p>
+    </li>
+    <li>
+        <b>Contorl Bus 
+<div class="badge badge-warning">Bus</div>
+</b>
+        <p>The Control bus is used to control the functioning of the processor. It's used to send signals to different components of the CPU in order to invoke various actions, like to invoke a memory read or write or I/O operations. This is used by the CU.</p>
+    </li>
+</ul>
+
+
+<h5 id="buses">A little bit about buses</h5>
+
+
+<br>
+
+<div class="d-flex justify-content-center">
+    <img src="../img/bus.jpg" class="img-fluid rounded" width="40%" alt="a bus... beep beep">
+</div>
+
+<br>
+
+<p>Buses are used by a processor to move signals around the CPU. Physically, buses are traces on the motherboard or inside the CPU, and typically there are multiple traces to carry multiple signals at once.</p>
+
+<p>This is what the word size of a bus is referring to. The word size, measured in bits, is the amount of traces that comprise a bus. If you have a 32-bit bus, there will be 32 physical connections on the circuit board. The higher this value, this more data that can be transferred at once and the more efficient the bus is.</p>
+
+
+<h4 id="fdecycle">The Fetch, Decode, Execute cycle</h5>
+
+
+<p>The FDE cycle is a sequence of actions that a processor takes to fully execute an instruction, and is comprised of three main stages: <i>fetch</i>ing instructions, <i>decod</i>ing instructions and <i>execut</i>ing instructions.</p>
+
+<p>An instruction is a combination of an opcode and an operand. The opcode is the actual instruction to execute, and the operand is the data to perform the instruction on.</p>
+
+<ul>
+    <li>
+        <b>Fetch</b>
+        <ul>
+            <li>The contents of the PC are copied into the MAR</li>
+            <li>A memory read occurs - this copies the contents of the memory address specified by the MAR into the MDR</li>
+            <li>The PC is incremented by one</li>
+            <li>The instruction word (opcode) is copied into the CIR from the MDR</li>
+        </ul>
+    </li>
+    <li>
+        <b>Decode</b>
+        <ul>
+            <li>The contents of the CIR are interpreted by the CU, which will then begin controlling various aspects of the processor in order to execute the instruction</li>
+        </ul>
+    </li>
+    <li>
+        <b>Execute</b>
+        <ul>
+            <li>The opcode of the instruction is decomposed into a simple operation, like adding or comparing two values or storing a value</li>
+            <li>This action is then executed
+                <ul>
+                    <li>If this instruction invokes a memory write or read, a memory address specified in the operand is stored in the MDR and the memory read is commanded by the CU</li>
+                </ul>
+            </li>
+            <li>Unless the instruction is <code>stop</code>, the cycle repeats from here.</li>
+        </ul>
+    </li>
+</ul>
+
+
+<h4 id="perf">Performance of a CPU</h5>
+
+
+<p>The overall performance of a CPU is determined by multiple factors.</p>
+
+<ul>
+    <li>
+        <b>Clock speed</b>
+        <p>The clock speed of a processor is how many times per second the FDE cycle can be completed. It's measured in hertz, and modern processors can be running at speeds in the 
+<span style="text-decoration-style: dotted; text-decoration-line: underline;" data-toggle="tooltip" data-placement="top" title="a billion hertz">gigahertz</span>
+ range.</p>
+    </li>
+    <li>
+        <b>Core count</b>
+        <p>A CPU can have multiple cores, each one acting like a separate mini CPU. The presence of multiple cores allows for multiple instructions to be executed in parallel, hence affecting the performance of a CPU.</p>
+    </li>
+    <li>
+        <b>Cache</b>
+        <p>Processors frequently have to fetch instructions and data from the main memory. Compared to the speed of the processor, this is painfully slow, which causes a severe bottleneck. To migitage this, the procesor caches commonly used data and instructions in very high speed registers inside the processor, which reduces the time wasted spent waiting on memory reads.</p>
+    </li>
+</ul>
+
+
+<h4 id="pipelining">Pipelining</h5>
+
+
+<p>Pipelining is a method of processor optimisation that works by executing multiple instructions that are in multiple stages of the FDE cycle at the same time.</p>
+
+<p>When an instruction is in the execution phase of the FDE cycle, other sections of the processor that would usually handle fetching and decoding instructions are sat idle, doing nothing, wasting time.</p>
+
+<p>A production line type system is employed. While one instruction is in the execute phase, another instruction can be in the decode phase, and another instruction can be in the fetch phase. Each of these phases will be occuring simultanously. This improves the overall utilisation of the processor, as dead time is reduced.</p>
+
+<p>Dead time in the processor is not entirely removed, since different phases may take different amounts of time, but it drastically improves the efficiency of the processor.</p>
+
+<p>The key limitation of pipelining is that it can only be used with RISC CPUs (and not in the Von Neumann architecture). In a CISC CPU, an instruction might take more than one 
+<span style="text-decoration-style: dotted; text-decoration-line: underline;" data-toggle="tooltip" data-placement="top" title="one clock cycle">tick</span>
+ to complete, meaning that after a single tick it cannot be guaranteed that every section of the processor will be ready to recieve something new to work on.</p>
+
+<p>As a result, you will only see pipelining employed in small, embedded devices, like handheld or IoT devices.</p>
+
+
+<h4 id="architectures">Processor architectures</h5>
+
+
+<p>There are two main processor architectures - the Von Neumann architecture, and the Harvard architecture. The main difference between the two is that the Harvard architecture employs a separate memory bank for data and instructions.</p>
+
+<table class="table">
+    <tr>
+        <th>Von Neumann</th>
+        <th>Harvard</th>
+    </tr>
+    <tr>
+        <td>Program data and instructions share a memory area</td>
+        <td>Program data and instructions have separate memory areas</td>
+    </tr>
+    <tr>
+        <td>Each instruction takes two clock cycles to execute (decode, execute)</td>
+        <td>Each instruction takes a single clock cycle to execute (if pipelined)</td>
+    </tr>
+    <tr>
+        <td>Pipelining cannot be implemented</td>
+        <td>Pipelinig can be implemented</td>
+    </tr>
+    <tr>
+        <td>Older and more robust (very widely used, battled tested)</td>
+        <td>Newer and fancier</td>
+    </tr>
+</table>
+
+<p>It's common for embedded systems to use the Harvard architecture, and for general purpose computers to use the Von Neumann architecture.</p>
+
+
+<h3 id="typesofprocessor"><code>1.1.2</code> Types of processor</h3>
+
+
+
+<h4 id="ciscrisc">CISC and RISC processors</h5>
+
+
+<p>CISC and RISC refer to the instruction set that a processor uses. They stand for Complex Instruction Set Computers and Reduced Instruction Set Computers.</p>
+
+<p>CISC CPUs are of the types made by Intel and AMD - they use less registers than their equivalent RISC CPU, but uses microprogramming on the chip itself to handle differing formats of instructions. Its aim is to facilitate the completion of a task in as few lines of assembly code as possible, by morphing a single instruction into a more complex task comprised of multiple, lower level instructions. One of these complex instructions takes more than a single clock cycle to execute.</p>
+
+<p>The extra circuitry in a CISC processor requires more power, which creates more heat, which means that CISC processors are only used in applications where there is a capacity dealing with that heat (for example, in a laptop you have the space to integrate a proper cooling system, but you do not in a smartphone).</p>
+
+<p>RISC CPUs are processors with a smaller set of instructions available for use - the focus here is not to reduce the amount of Assembly code required, but to increase the efficiency of the CPU by removing unnecessary complexities.</p>
+
+<p>80% of the work in a CISC CPU is done by 20% of the available instructions. If you leave only the fundamental instructions, you can remove the requirement for extra circuitry on a chip, which also removes the requirement for more power and the generation of as much heat.</p>
+
+<p>RISC processors are commonly used in phones and tablets, are cheaper than CISC processors, run at slower clock speeds (but take less time to do something - also it's not like a phone is doing anything especially heavy) and are more efficient for simple tasks than their CISC counterpart.</p>
+
+
+<h4 id="multiple">Doing multiple things at once</h5>
+
+
+<p>It's pretty common to use a computer for multiple different tasks at once - for example, you could be typing out a report in your word processor while listening to music in your web browser. This requires your computer to be multitasking - literally doing two different things at once.</p>
+
+
+<h5 id="multicore">Multicore systems</h5>
+
+
+<p>Modern processors have multiple CPU cores, which are essentially mini processors inside of one main processor. This means that a single CPU can be executing more than one instruction at any one given time by assigining different tasks to different processor cores. Having more processor cores increases the performance of the overall CPU.</p>
+
+
+<h5 id="parallel">Parallel processing</h5>
+
+
+<p>Parallel computing is where a task is decomposed into multiple, smaller tasks, distributed across multiple cores for processing and reconstructed into a single result when all concurrent processing for that task has finished. An example of this is rendering a frame in a GPU.</p>
+
+
+<h4 id="gpus">Graphics Processing Units</h5>
+
+
+<p>A GPU (also known as a video card) is a 
+<span style="text-decoration-style: dotted; text-decoration-line: underline;" data-toggle="tooltip" data-placement="top" title="A computer processor used to supplement the functions of the main CPU">coprocessor</span>
+ intended to be used for graphics processing. They differ from a traditional processor in that they have far more processor cores, allowing for many synchronous operations to be occuring at once. This is especially useful in for rendering graphics, as many frames need to be rendered per second. <a href="https://www.nvidia.com/en-gb/geforce/graphics-cards/rtx-2080/" rel="noopener noreferrer">The GeForce RTX 2080 has nearly 3000 cores.</a></p>
+
+<p>GPUs, however, also have uses outside of graphics processing. Often, they are used for cryptocurrency mining and machine learning as the same properties that make them suitable for rendering video make them suitable for use in these other applications.</p>
+
+
+<h3 id="iostorage"><code>1.1.3</code> Input, output and storage</h3>
+
+
+<p>There are a multitude of different types of input, output and storage devices that can be connected to a computer. Each of them serve a different purpose and have a different use case.</p>
+
+
+<h4 id="io">Input and output</h5>
+
+
+<p>Input devices are devices that allow data entry to a computer. This could be a human interface device like a mouse or a keyboard, or a scanner or webcam.</p>
+
+<p>Output devices are devices that allow a computer to display the result of a computation to the outside world. This could be something like a monitor, speaker or printer.</p>
+
+
+<h4 id="storage">Storage</h5>
+
+
+<p>Different types of storage are suited to different environments due to their individual characteristics.</p>
+
+<ul>
+
+    <li>
+        <b>Magnetic tape</b>
+        <p>Some form of magnetic tape is passed over a read/write head that changes the magnetism of specific sectors to encode/decode data on that tape. Examples include floppy disks, VHS and cassette tapes and archival tapes.</p>
+        <p>Slow compared to other types of storage device, can degrade over time, provides huge amounts of storage (hundreds of terabytes)</p>
+    </li>
+
+    <li>
+        <b>Magnetic disks</b>
+        <p>Spinning disks that have have individual sectors that can have their magnetic polarity changed by a read/write head to encode data. There are different types of magnetic disk storage depending on the use case - for example, devices designed for the home will not be suited to running 24/7, whereas server grade drives will.</p>
+        <p>Prone to damage (especially if jolted/moved when running), but moderately fast, cheap and cost effective, can store relatively large amounts of data (hundreds of gigabytes to tens of terabytes)</p>
+    </li>
+
+    <li>
+        <b>Optical disks</b>
+        <p>Disks with physical grooves etched into them in order to encode data which can be read and decoded by a laser. Multiple layers of data can be present on a single disk to store more data on it (for example, blu-ray disks have 3 layers).</p>
+        <p>Lightweight, very cheap, limited capacity (hundreds of megabytes to tens of gigabytes)</p>
+    </li>
+
+    <li>
+        <b>Solid state storage</b>
+        <p>Integrated circuits that store data in a non-volatile manner with no moving parts.</p>
+        <p>Very fast, somewhat expensive (especially compared to magnetic disk storage), mostly imperveous to external influence/damage, decent capacity (tens to hundreds of gigabytes)</p>
+    </li>
+
+    <li>
+        <b>RAM and ROM</b>
+        <p>ROM (Read Only Memory) is typically used to store the boot files to tell a computer how to start and where to boot from.</p>
+        <p>RAM (Random Access Memory) is used to store the state of a computer while it is running (things such as the OS, running programs, etc). It is volatile and requires constant power to remain intact.</p>
+    </li>
+
+    <li>
+        <b>Virtual storage</b>
+        <p>Space in RAM that behaves as if it were non-volatile storage on a regular drive. The contents can be periodically cloned to secondary storage to ensure data persistence.</p>
+    </li>
+
+    <li>
+        <b>Virtual memory</b>
+        <p>Space on the secondary storage device that's used to increase the capacity of the system RAM. This is used in situations where the system has run out of actual RAM to store everything that needs to be stored. Data that is still needed but is not currently in use is copied to the secondary storage to make space in the main memory for things that are in use.</p>
+        <p>This can lead to <a href="https://en.wikipedia.org/wiki/Thrashing_(computer_science)" rel="noopener">disk thrashing</a> and accelerated disk failure.</p>
+    </li>
+</ul>
+
+
+        <br>
+        <footer style="font-size: 0.8em;margin-left: 1em;padding-left: 1em;">
+    Found an issue with this site? Let me know by using the contact form at <a href="https://www.tdpain.net?contact">on my homepage</a>.<br>
+    Verbatim copying and redistribution of this page is allowed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">Creative Commons Noncommercial Noderivs licence (v4.0)</a>, provided this notice is preserved.
+</footer>
+    </main>
+    <br>
+
+</body>
+</html>

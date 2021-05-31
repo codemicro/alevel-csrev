@@ -1,0 +1,133 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+        <title>OCR A-level CompSci | 1.2 Software and software development</title>
+    
+
+    <link rel="stylesheet" href="https://pages.tdpain.net/alevel-csrev/bootstrap.min.css" type="text/css">
+    <script src="https://pages.tdpain.net/alevel-csrev/bootstrap.min.js" defer></script>
+    <script src="https://pages.tdpain.net/alevel-csrev/jquery-3.5.1.slim.min.js" defer></script>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic");
+        body {
+            font-family: "Lato", sans-serif;
+        }
+    </style>
+    
+    <meta property="og:site_name" content="tdpain.net">
+
+    <meta property="og:title" content="OCR CompSci - 1.2 Software and software development">
+    <meta property="og:description" content="Revision materials for section 1.2 (Software and software development) of the OCR GCSE CompSci course.">
+    <meta name="description" content="Revision materials for section 1.2 (Software and software development) of the OCR GCSE CompSci course.">
+
+<meta property="og:url" content="https://pages.tdpain.net/alevel-csrev/12/">
+
+
+    
+</head>
+<body>
+    
+    <div class="jumbotron jumbotron-fluid">
+    <div style="position: absolute; top: 0; padding-left: 10px; padding-top: 5px; font-size: 15px">
+        
+            <a href="../">Go back</a>
+        
+    </div>
+    <div class="container">
+
+        
+            <h1 class="display-4">1.2 Software and software development</h1>
+        
+
+        <p class="lead">OCR A-level Computer Science (H446)</p>
+    </div>
+</div>
+    <main class="container">
+        
+<div class="card" style="width: 40rem;">
+    <div class="card-body">
+        <h6>Contents</h6>
+<ul>
+    <li><a href="#systemssoftware"><code>1.2.1</code> Systems software</a>
+        <ul>
+            <li><a href="#memorymanagement">Memory management</a>
+                <ul>
+                    <li><a href="#segmentation">Segmentation</a></li>
+                    <li><a href="#paging">Paging</a></li>
+                    <li><a href="#vmem">Virtual memory</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+    </div>
+</div>
+
+<br>
+
+
+<h3 id="systemssoftware"><code>1.2.1</code> Systems software</h3>
+
+
+
+<h4 id="os">Operating systems</h5>
+
+
+<p>Operating systems is the software the manages the resources of a computer, providing an interface between software and hardware. The OS is not a single thing - instead, it's a collection of lots of smaller programs that work in synchrony to perform the overall task of running the computer.</p>
+
+<p>The roles of an operating system are as follows:</p>
+
+<ul>
+    <li>Provide a user interface (a way to use the computer - GUI, gestures, cursors, etc)</li>
+    <li>Perform processor management (sharing processor time, managing interrupts, etc)</li>
+    <li>Perform memory management (virtual memory, loading/clearing memory, segmentation, etc)</li>
+    <li>Dealing with peripherals for both input and output (IO requests, device drivers, etc)</li>
+    <li>Provide utility programs (disk defragmentation, file managers, etc)</li>
+    <li>Provide networking services</li>
+    <li>Maintain system security (user access controls, file permission management, etc.)</li>
+</ul>
+
+
+<h4 id="memorymanagement">Memory management</h5>
+
+
+
+<h5 id="segmentation">Segmentation</h5>
+
+
+<p>Segmentation is where the system memory is split into blocks called segments that each store their own set of data. Each segment has an ID and offset (eseentially a length), which is required because segments can have varying sizes depending on the OS and their state.</p>
+
+<p>The OS maintains a record of these segments to track and effectively deal with memory. Segmentation can be used to aid with virtual memory, since entire segments can be sent to/received from secondary storage.</p>
+
+
+<h5 id="paging">Paging</h5>
+
+
+<p>Paging is when the OS will load a fixed-size block of data into RAM from the secondary storage. This block is called a <i>page</i>. It allows programs bigger than the RAM of the computer to run.</p>
+
+<p>Think of it like a book of instructions - each page contains a set of instructions, one page of which you are using. You can forget about previous pages, because you've already used them, and you don't need to think about coming pages, because you're not ready to use them yet.</p>
+
+
+<h5 id="vmem">Virtual memory</h5>
+
+
+<p>Virtual memory is helpful when the system completely runs out of RAM and tends to be used alongside segmentation and paging. It's a tool to manage help share what is a finite resource across a system. <a href="../11/#storage">Read more about virtual memory here</a>.</p>
+
+
+        <br>
+        <footer style="font-size: 0.8em;margin-left: 1em;padding-left: 1em;">
+    Found an issue with this site? Let me know by using the contact form at <a href="https://www.tdpain.net?contact">on my homepage</a>.<br>
+    Verbatim copying and redistribution of this page is allowed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">Creative Commons Noncommercial Noderivs licence (v4.0)</a>, provided this notice is preserved.
+</footer>
+    </main>
+    <br>
+
+</body>
+</html>
