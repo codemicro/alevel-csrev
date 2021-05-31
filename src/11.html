@@ -50,6 +50,13 @@
             <li><a href="#gpus">Graphics Processing Units</a></li>
         </ul>
     </li>
+    <li>
+        <a href="#iostorage"><code>1.1.3</code> Input, output and storage</a>
+        <ul>
+            <li><a href="#io">Input and output</a></li>
+            <li><a href="#storage">Storage</a></li>
+        </ul>
+    </li>
 </ul>
 {% include 'partials/contentsEnd.html' %}
 
@@ -244,5 +251,63 @@
 <p>A GPU (also known as a video card) is a {{ components.tooltip("coprocessor", "A computer processor used to supplement the functions of the main CPU") }} intended to be used for graphics processing. They differ from a traditional processor in that they have far more processor cores, allowing for many synchronous operations to be occuring at once. This is especially useful in for rendering graphics, as many frames need to be rendered per second. <a href="https://www.nvidia.com/en-gb/geforce/graphics-cards/rtx-2080/" rel="noopener noreferrer">The GeForce RTX 2080 has nearly 3000 cores.</a></p>
 
 <p>GPUs, however, also have uses outside of graphics processing. Often, they are used for cryptocurrency mining and machine learning as the same properties that make them suitable for rendering video make them suitable for use in these other applications.</p>
+
+{{ headers.header("iostorage", "<code>1.1.3</code> Input, output and storage") }}
+
+<p>There are a multitude of different types of input, output and storage devices that can be connected to a computer. Each of them serve a different purpose and have a different use case.</p>
+
+{{ headers.subheader("io", "Input and output") }}
+
+<p>Input devices are devices that allow data entry to a computer. This could be a human interface device like a mouse or a keyboard, or a scanner or webcam.</p>
+
+<p>Output devices are devices that allow a computer to display the result of a computation to the outside world. This could be something like a monitor, speaker or printer.</p>
+
+{{ headers.subheader("storage", "Storage") }}
+
+<p>Different types of storage are suited to different environments due to their individual characteristics.</p>
+
+<ul>
+
+    <li>
+        <b>Magnetic tape</b>
+        <p>Some form of magnetic tape is passed over a read/write head that changes the magnetism of specific sectors to encode/decode data on that tape. Examples include floppy disks, VHS and cassette tapes and archival tapes.</p>
+        <p>Slow compared to other types of storage device, can degrade over time, provides huge amounts of storage (hundreds of terabytes)</p>
+    </li>
+
+    <li>
+        <b>Magnetic disks</b>
+        <p>Spinning disks that have have individual sectors that can have their magnetic polarity changed by a read/write head to encode data. There are different types of magnetic disk storage depending on the use case - for example, devices designed for the home will not be suited to running 24/7, whereas server grade drives will.</p>
+        <p>Prone to damage (especially if jolted/moved when running), but moderately fast, cheap and cost effective, can store relatively large amounts of data (hundreds of gigabytes to tens of terabytes)</p>
+    </li>
+
+    <li>
+        <b>Optical disks</b>
+        <p>Disks with physical grooves etched into them in order to encode data which can be read and decoded by a laser. Multiple layers of data can be present on a single disk to store more data on it (for example, blu-ray disks have 3 layers).</p>
+        <p>Lightweight, very cheap, limited capacity (hundreds of megabytes to tens of gigabytes)</p>
+    </li>
+
+    <li>
+        <b>Solid state storage</b>
+        <p>Integrated circuits that store data in a non-volatile manner with no moving parts.</p>
+        <p>Very fast, somewhat expensive (especially compared to magnetic disk storage), mostly imperveous to external influence/damage, decent capacity (tens to hundreds of gigabytes)</p>
+    </li>
+
+    <li>
+        <b>RAM and ROM</b>
+        <p>ROM (Read Only Memory) is typically used to store the boot files to tell a computer how to start and where to boot from.</p>
+        <p>RAM (Random Access Memory) is used to store the state of a computer while it is running (things such as the OS, running programs, etc). It is volatile and requires constant power to remain intact.</p>
+    </li>
+
+    <li>
+        <b>Virtual storage</b>
+        <p>Space in RAM that behaves as if it were non-volatile storage on a regular drive. The contents can be periodically cloned to secondary storage to ensure data persistence.</p>
+    </li>
+
+    <li>
+        <b>Virtual memory</b>
+        <p>Space on the secondary storage device that's used to increase the capacity of the system RAM. This is used in situations where the system has run out of actual RAM to store everything that needs to be stored. Data that is still needed but is not currently in use is copied to the secondary storage to make space in the main memory for things that are in use.</p>
+        <p>This can lead to <a href="https://en.wikipedia.org/wiki/Thrashing_(computer_science)" rel="noopener">disk thrashing</a> and accelerated disk failure.</p>
+    </li>
+</ul>
 
 {% endblock %}
