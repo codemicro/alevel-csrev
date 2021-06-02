@@ -19,6 +19,11 @@
                     <li><a href="#vmem">Virtual memory</a></li>
                 </ul>
             </li>
+            <li><a href="#scheduling">Scheduling</a></li>
+            <li><a href="#typesos">Types of systems</a></li>
+            <li><a href="#bios">BIOS</a></li>
+            <li><a href="#drivers">Device drivers</a></li>
+            <li><a href="#vm">Virtual machines</a></li>
         </ul>
     </li>
 </ul>
@@ -61,5 +66,84 @@
 {{ headers.subsubheader("vmem", "Virtual memory") }}
 
 <p>Virtual memory is helpful when the system completely runs out of RAM and tends to be used alongside segmentation and paging. It's a tool to manage help share what is a finite resource across a system. <a href="../11/#storage">Read more about virtual memory here</a>.</p>
+
+{{ headers.subheader("interrupts", "Interrupts") }}
+
+<p>Interrupts are used when a computer needs to temporarily stop executing the current program and move to executing some other code to handle a specific event. Interrupts aggregate in a queue to be executed sequentially.</p>
+
+<p>The interrupt queue is checked after each instruction is executed in the FDE cycle. If the queue is empty, the next instruction is executed as normal - however, if the queue has pending interrupts in it, the Interrupt Service Routine (ISR) is run to deal with it.</p>
+
+<p>There are a variety of different types of interrupts, each with different meanings and priorities.</p>
+
+<ul>
+    <li>
+        <b>I/O interrupts</b>
+        <p>When a computer is performing a data transfer operation, and the process either finishes or errors (for example, if a USB stick is unplugged while being written to, the remote address suddenly becomes missing and data transfer cannot continue), an I/O interrupt is sent.</p>
+    </li>
+
+    <li>
+        <b>Timer interrupts</b>
+        <p>Time critical tasks (like playing a video while keeping the video and audio aligned) can use a timer interrupts to take priority over other currently running processes.</p>
+    </li>
+
+    <li>
+        <b>Hardware interrupts</b>
+        <p>Mark critical errors in hardware that affect the current process being completed, like a sudden loss of power. In that case, a hardware interrupt would mean "finish as many loose ends as possible and store as much of this stuff as possible before we lose power completely ok GO"</p>
+    </li>
+
+    <li>
+        <b>Program interrupts</b>
+        <p>Produced by software when a runtime exception has been raised. A common cause of these is when a program tries to access memory it is not allowed to access. Program interrupts lead to the "not responding" thing you get in Windows.</p>
+    </li>
+</ul>
+
+<p>An interrupt isn't the end of a program, though - the processor has to be able to resume where it left off after the interrupt has been executed. In order to do this, the previous state of the processor is retained while the interrupt is executing, so the processor can drop back into the previous task while when the ISR has finished.</p>
+
+{{ images.image("../img/interrupts.png", "interrupt flow chart", width="50%") }}
+
+{{ headers.subheader("scheduling", "Scheduling") }}
+
+<mark>// TODO</mark>
+
+{{ headers.subheader("typesos", "Types of systems") }}
+
+<p>Computers are used for a plethora of things, and as a result they often need different types of operating systems to do their jobs effectively.</p>
+
+<ul>
+    <li>
+        <b>Distributed</b>
+        <p>A distributed system is one that splits tasks into smaller parts and spreads them across multiple computer processors.</p>
+    </li>
+    <li>
+        <b>Embedded</b>
+        <p>An embedded system is one that is embedded in a device - for example, the computer controlling your washing machine or clock radio. They perform a small range of specific tasks to do with the operating of the device they are embedded in. They are also hard to update. Typically they consume less power than other systems.</p>
+    </li>
+    <li>
+        <b>Multi-tasking</b>
+        <p>Multi-tasking systems are ones that can seemingly do multiple things at once by sharing processor time between multiple ongoing processes. Time slicing is used to switch quickly between applications that are stored in memory.</p>
+    </li>
+    <li>
+        <b>Multi-user</b>
+        <p>Multi-user comptuers are computers than have the ability to be used by more than one person at once. They are typically used when a computer is expensive or otherwise unique that therefore has to be shared between multiple people to make it cost effective. This requires a scheduling system to be in place.</p>
+    </li>
+    <li>
+        <b>Real-time</b>
+        <p>A real-time system in one that is responding to external events as soon as they've happened. This type of system is used in things like aeroplane autopilots and robotics. Used in time-critical situations.</p>
+    </li>
+</ul>
+
+{{ headers.subheader("bios", "BIOS") }}
+
+<p>Every computer has a BIOS (Basic Input Output System). It's used to load the operating system into the memory of the computer and start executing that.</p>
+
+{{ headers.subheader("drivers", "Device Drivers") }}
+
+<p>Drivers are used to tell an operating system how to communicate with external hardware. This is required because of differences in how different pieces of hardware work. They are specific to the OS and computer hardware.</p>
+
+{{ headers.subheader("vm", "Virtual machines") }}
+
+<p>A virtual machine is a digital imitation of a physical computer that allows software to run in a digital environment as if it were being run on a normal computer. They provide a layer of isolation between the OS installed on the physical comptuer, as well as the ability to run software built for a different operating system.</p>
+
+<p>A VM will usually be a lot slower than running the software on a physical machine.</p>
 
 {% endblock %}
